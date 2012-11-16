@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/nameEditText"
+        android:layout_alignBottom="@+id/nameEditText"
+        android:layout_alignParentLeft="true"
+        android:text="@string/name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/nameTextView"
+        android:ems="30"
+        android:inputType="textCapWords" >
+
+        <requestFocus />
+    </EditText>
+    
+    <TextView
+        android:id="@+id/latTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/latEditText"
+        android:layout_alignBottom="@+id/latEditText"
+        android:layout_below="@+id/nameTextView"
+        android:text="@string/latitude"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+    <EditText
+        android:id="@+id/latEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameEditText"
+        android:layout_toRightOf="@+id/latTextView"
+        android:ems="20"
+        android:inputType="numberDecimal" >
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/longTextView"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/longEditText"
+        android:layout_alignBottom="@+id/longEditText"
+        android:layout_below="@+id/latTextView"
+        android:text="@string/longitude"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<EditText
+        android:id="@+id/longEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/latEditText"
+        android:layout_toRightOf="@+id/longTextView"
+        android:ems="20"
+        android:inputType="numberDecimal" />
+
+	<Button
+	    android:id="@+id/confirmButton"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentLeft="true"
+	    android:text="@string/confirm" />
+
+	<CheckBox
+	    android:id="@+id/activeCheckBox"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/longTextView"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/active" />
+	
+</RelativeLayout>

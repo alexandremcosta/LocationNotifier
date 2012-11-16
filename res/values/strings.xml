@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">Location Notifier</string>
+    <string name="menu_settings">Settings</string>
+    <string name="save">Save</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="name">Name</string>
+    <string name="active">Ativo</string>
+    <string name="confirm">Confirm</string>
+    <string name="title_edit">Location</string>
+    <string name="menu_delete">Delete</string>
+    <string name="no_locations">There are no locations</string>
+    <string name="title_location_list">Manage Locations</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main">MainActivity</string>
+	<string name="manage_locations">Manage Locations</string>
+	<string name="on">On</string>
+	<string name="off">Off</string>
+</resources>
