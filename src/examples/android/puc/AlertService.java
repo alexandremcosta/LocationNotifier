@@ -43,7 +43,7 @@ public class AlertService extends Service {
 		PendingIntent proximityIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, receiverIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 		locationManager.addProximityAlert(latitude, 
 										  longitude, 
-										  100, 
+										  1000, 
 										  -1, 
 										  proximityIntent);
 		pendingIntents.add(proximityIntent);
@@ -51,7 +51,6 @@ public class AlertService extends Service {
 	}
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
