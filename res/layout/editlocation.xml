@@ -45,7 +45,7 @@
         android:layout_below="@+id/nameEditText"
         android:layout_toRightOf="@+id/latTextView"
         android:ems="20"
-        android:inputType="numberDecimal" >
+        android:inputType="numberDecimal|numberSigned" >
 
     </EditText>
 
@@ -60,13 +60,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 	
 	<EditText
-        android:id="@+id/longEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/latEditText"
-        android:layout_toRightOf="@+id/longTextView"
-        android:ems="20"
-        android:inputType="numberDecimal" />
+	    android:id="@+id/longEditText"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/latEditText"
+	    android:layout_toRightOf="@+id/longTextView"
+	    android:ems="20"
+	    android:inputType="numberDecimal|numberSigned" />
 
 	<Button
 	    android:id="@+id/confirmButton"

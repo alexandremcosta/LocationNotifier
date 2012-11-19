@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -62,10 +63,11 @@ public class EditLocationActivity extends Activity {
 		Cursor cursor =	getContentResolver().query(uri, projection, null, null, null);
 		if (cursor != null) {
 			cursor.moveToFirst();
-
+			Double latitude = cursor.getDouble(cursor.getColumnIndexOrThrow(LocationTable.LATITUDE));
+			Double longitude = cursor.getDouble(cursor.getColumnIndexOrThrow(LocationTable.LONGITUDE));
 			nameEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(LocationTable.NAME)));
-			latEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(LocationTable.LATITUDE)));
-			longEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(LocationTable.LONGITUDE)));
+			latEditText.setText(latitude.toString());
+			longEditText.setText(longitude.toString());
 			
 			if (cursor.getInt(cursor.getColumnIndexOrThrow(LocationTable.ACTIVE)) == 0) 
 				activeCheckBox.setChecked(false);
@@ -108,9 +110,9 @@ public class EditLocationActivity extends Activity {
 		
 		if (latString == null || latString.isEmpty())
 			latitude = 0.0;
-		else
+		else {
 			latitude = Double.parseDouble(latString);
-		
+		}
 		if (latString == null || latString.isEmpty())
 			longitude = 0.0;
 		else
