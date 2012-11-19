@@ -11,46 +11,39 @@ import android.util.Log;
 
 public class LocationReceiver extends BroadcastReceiver {
 
+	private NotificationManager notificationManager;
+	
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Boolean entering = intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false);
-		if(entering)
-			showEnteringNotification(context, intent);
-		else
-			showExitingNotification(context, intent);
-	}
-	
-	private void showEnteringNotification(Context context, Intent intent) {
+		Log.d("LocationReceiver", "onReceive");
+		notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		int id = intent.getIntExtra("id", 0);
 		String name = intent.getStringExtra("name");
-		Log.d("LocationReceiver", "onReceive");
-		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		int icon = R.drawable.ic_launcher;
+		
+		Boolean entering = intent.getBooleanExtra(LocationManager.KEY_PROXIMITY_ENTERING, false);
+		if(entering)
+			showEnteringNotification(context, intent, id, name);
+		else
+			showExitingNotification(context, intent, id, name);
+	}
+	
+	private void showEnteringNotification(Context context, Intent intent, int id, String msg) {
 		CharSequence notification = "Location Notifier: novo lembrete!";
-		long now = System.currentTimeMillis();
-		Notification n = new Notification(icon, notification, now);
+		Notification n = new Notification(R.drawable.ic_launcher, notification, System.currentTimeMillis());
 		CharSequence title = "Lembrar de:";
-		CharSequence text = name;
 		Intent notificationIntent = new Intent(context, MainActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, id, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-		n.setLatestEventInfo(context, title, text, pendingIntent);
+		n.setLatestEventInfo(context, title, msg, pendingIntent);
 		notificationManager.notify(id, n);
 	}
 	
-	private void showExitingNotification(Context context, Intent intent) {
-		int id = intent.getIntExtra("id", 0);
-		String name = intent.getStringExtra("name");
-		Log.d("LocationReceiver", "onReceive");
-		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		int icon = R.drawable.ic_launcher;
+	private void showExitingNotification(Context context, Intent intent, int id, String msg) {
 		CharSequence notification = "Location Notifier: não esqueça!";
-		long now = System.currentTimeMillis();
-		Notification n = new Notification(icon, notification, now);
+		Notification n = new Notification(R.drawable.ic_launcher, notification, System.currentTimeMillis());
 		CharSequence title = "Não esqueça de:";
-		CharSequence text = name;
 		Intent notificationIntent = new Intent(context, MainActivity.class);
 		PendingIntent pendingIntent = PendingIntent.getActivity(context, id, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-		n.setLatestEventInfo(context, title, text, pendingIntent);
+		n.setLatestEventInfo(context, title, msg, pendingIntent);
 		notificationManager.notify(id, n);
 	}
 }
