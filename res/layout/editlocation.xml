@@ -12,7 +12,7 @@
         android:layout_alignBaseline="@+id/nameEditText"
         android:layout_alignBottom="@+id/nameEditText"
         android:layout_alignParentLeft="true"
-        android:text="@string/name"
+        android:text="Lembrete"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     
     <EditText

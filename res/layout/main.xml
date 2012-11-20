@@ -22,4 +22,14 @@
         android:layout_below="@+id/toggleButton"
         android:text="@string/manage_locations" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/manageButton"
+        android:layout_marginTop="38dp"
+        android:text="Monitorando..."
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>

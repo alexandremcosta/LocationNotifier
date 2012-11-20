@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditLocationActivity extends Activity {
-	private EditText nameEditText;
+	private EditText reminderEditText;
 	private EditText latEditText;
 	private EditText longEditText;
 	private CheckBox activeCheckBox;
@@ -25,7 +25,7 @@ public class EditLocationActivity extends Activity {
 		super.onCreate(bundle);
 		setContentView(R.layout.editlocation);
 
-		nameEditText = (EditText) findViewById(R.id.nameEditText);
+		reminderEditText = (EditText) findViewById(R.id.nameEditText);
 		latEditText = (EditText) findViewById(R.id.latEditText);
 		longEditText = (EditText) findViewById(R.id.longEditText);
 		activeCheckBox = (CheckBox) findViewById(R.id.activeCheckBox);
@@ -43,7 +43,7 @@ public class EditLocationActivity extends Activity {
 
 		confirmButton.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				if (TextUtils.isEmpty(nameEditText.getText().toString()) ||
+				if (TextUtils.isEmpty(reminderEditText.getText().toString()) ||
 						TextUtils.isEmpty(latEditText.getText().toString()) ||
 						TextUtils.isEmpty(longEditText.getText().toString())) {
 					Toast.makeText(EditLocationActivity.this, "Don't leave blank fields", Toast.LENGTH_LONG).show();
@@ -64,7 +64,7 @@ public class EditLocationActivity extends Activity {
 			cursor.moveToFirst();
 			Double latitude = cursor.getDouble(cursor.getColumnIndexOrThrow(LocationTable.LATITUDE));
 			Double longitude = cursor.getDouble(cursor.getColumnIndexOrThrow(LocationTable.LONGITUDE));
-			nameEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(LocationTable.NAME)));
+			reminderEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(LocationTable.NAME)));
 			latEditText.setText(latitude.toString());
 			longEditText.setText(longitude.toString());
 			
@@ -92,7 +92,7 @@ public class EditLocationActivity extends Activity {
 
 	private void saveState() {
 		
-		String name = nameEditText.getText().toString();
+		String reminder = reminderEditText.getText().toString();
 		String latString = latEditText.getText().toString();
 		String longString = longEditText.getText().toString();
 		int active;
@@ -119,7 +119,7 @@ public class EditLocationActivity extends Activity {
 
 		
 		ContentValues values = new ContentValues();
-		values.put(LocationTable.NAME, name);
+		values.put(LocationTable.NAME, reminder);
 		values.put(LocationTable.LATITUDE, latitude);
 		values.put(LocationTable.LONGITUDE, longitude);
 		values.put(LocationTable.ACTIVE, active);
