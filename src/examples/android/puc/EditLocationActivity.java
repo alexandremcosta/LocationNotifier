@@ -1,10 +1,14 @@
 package examples.android.puc;
 
-import android.app.Activity;
+import java.util.ArrayList;
+
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -12,19 +16,51 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class EditLocationActivity extends Activity {
+import com.google.android.maps.GeoPoint;
+import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayItem;
+
+public class EditLocationActivity extends MapActivity {
 	private EditText reminderEditText;
 	private EditText latEditText;
 	private EditText longEditText;
 	private CheckBox activeCheckBox;
-
+	private MapView mapView;
+	private MyLocationOverlay myLocationOverlay;
+	private IOverlay tapOverlay;
 	private Uri todoUri;
+	private Drawable drawable;
+	
+	Handler h = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			Bundle data = msg.getData();
+
+			int latitude = data.getInt("latitude");
+			int longitude = data.getInt("longitude");
+			GeoPoint p = new GeoPoint(latitude, longitude);
+			OverlayItem overlayItem = new OverlayItem(p, "Pin", "Lembrete aqui!");
+			tapOverlay.addOverlay(overlayItem);
+			mapView.getOverlays().add(tapOverlay);
+			
+			Double lat = latitude / 1E6;
+			Double lon = longitude / 1E6;
+			latEditText.setText(String.valueOf(lat));
+			longEditText.setText(String.valueOf(lon));
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.editlocation);
-
+		
+		setMapViewUp();
+		
 		reminderEditText = (EditText) findViewById(R.id.nameEditText);
 		latEditText = (EditText) findViewById(R.id.latEditText);
 		longEditText = (EditText) findViewById(R.id.longEditText);
@@ -55,6 +91,26 @@ public class EditLocationActivity extends Activity {
 			}
 
 		});
+	}
+
+	private void setMapViewUp() {
+		drawable = this.getResources().getDrawable(R.drawable.mmarker);
+		mapView = (MapView) findViewById(R.id.mapview);
+		mapView.setBuiltInZoomControls(true);
+		tapOverlay = new IOverlay(drawable, h);
+		mapView.getOverlays().add(tapOverlay);
+		
+//		myLocationOverlay = new MyLocationOverlay(this, mapView);
+//		mapView.getOverlays().add(myLocationOverlay);
+//		myLocationOverlay.enableCompass();
+//		myLocationOverlay.enableMyLocation();
+//		myLocationOverlay.runOnFirstFix(new Runnable() {
+//			@Override
+//			public void run() {
+//				mapView.getController().animateTo(myLocationOverlay.getMyLocation());
+//			}
+//		});
+		
 	}
 
 	private void fillData(Uri uri) {
@@ -138,4 +194,8 @@ public class EditLocationActivity extends Activity {
 		Toast.makeText(EditLocationActivity.this, "Notification " + activeToast, Toast.LENGTH_LONG).show();
 	}
 
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
+	}
 }

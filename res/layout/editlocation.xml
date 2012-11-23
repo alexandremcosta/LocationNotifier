@@ -83,5 +83,14 @@
 	    android:layout_below="@+id/longTextView"
 	    android:layout_centerHorizontal="true"
 	    android:text="@string/active" />
+
+	<com.google.android.maps.MapView
+	    android:id="@+id/mapview"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_above="@+id/confirmButton"
+	    android:layout_below="@+id/activeCheckBox"
+	    android:apiKey="0-aVifmgzIXJy5H5hPmZezEHhkC_2qnkxGIxW4A"
+	    android:clickable="true" />
 	
 </RelativeLayout>
