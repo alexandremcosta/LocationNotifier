@@ -36,7 +36,8 @@
         android:layout_alignBottom="@+id/latEditText"
         android:layout_below="@+id/nameTextView"
         android:text="@string/latitude"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="gone" />
     
     <EditText
         android:id="@+id/latEditText"
@@ -45,7 +46,8 @@
         android:layout_below="@+id/nameEditText"
         android:layout_toRightOf="@+id/latTextView"
         android:ems="20"
-        android:inputType="numberDecimal|numberSigned" >
+        android:inputType="numberDecimal|numberSigned"
+        android:visibility="gone" >
 
     </EditText>
 
@@ -57,7 +59,8 @@
         android:layout_alignBottom="@+id/longEditText"
         android:layout_below="@+id/latTextView"
         android:text="@string/longitude"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:visibility="gone" />
 	
 	<EditText
 	    android:id="@+id/longEditText"
@@ -66,7 +69,8 @@
 	    android:layout_below="@+id/latEditText"
 	    android:layout_toRightOf="@+id/longTextView"
 	    android:ems="20"
-	    android:inputType="numberDecimal|numberSigned" />
+	    android:inputType="numberDecimal|numberSigned"
+	    android:visibility="gone" />
 
 	<Button
 	    android:id="@+id/confirmButton"

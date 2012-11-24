@@ -59,7 +59,7 @@ public class EditLocationActivity extends MapActivity {
 		super.onCreate(bundle);
 		setContentView(R.layout.editlocation);
 		
-		setMapViewUp();
+		
 		
 		reminderEditText = (EditText) findViewById(R.id.nameEditText);
 		latEditText = (EditText) findViewById(R.id.latEditText);
@@ -71,7 +71,9 @@ public class EditLocationActivity extends MapActivity {
 		Bundle extras = getIntent().getExtras();
 
 		todoUri = (bundle == null) ? null : (Uri) bundle.getParcelable(LocationContentProvider.CONTENT_ITEM_TYPE);
-
+		
+		setMapViewUp();
+		
 		if (extras != null) {
 			todoUri = extras.getParcelable(LocationContentProvider.CONTENT_ITEM_TYPE);
 			fillData(todoUri);
@@ -99,18 +101,6 @@ public class EditLocationActivity extends MapActivity {
 		mapView.setBuiltInZoomControls(true);
 		tapOverlay = new IOverlay(drawable, h);
 		mapView.getOverlays().add(tapOverlay);
-		
-//		myLocationOverlay = new MyLocationOverlay(this, mapView);
-//		mapView.getOverlays().add(myLocationOverlay);
-//		myLocationOverlay.enableCompass();
-//		myLocationOverlay.enableMyLocation();
-//		myLocationOverlay.runOnFirstFix(new Runnable() {
-//			@Override
-//			public void run() {
-//				mapView.getController().animateTo(myLocationOverlay.getMyLocation());
-//			}
-//		});
-		
 	}
 
 	private void fillData(Uri uri) {
@@ -123,6 +113,13 @@ public class EditLocationActivity extends MapActivity {
 			reminderEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow(LocationTable.NAME)));
 			latEditText.setText(latitude.toString());
 			longEditText.setText(longitude.toString());
+			
+			GeoPoint p = new GeoPoint((int)(latitude * 1e6), (int)(longitude * 1e6));
+			OverlayItem overlayItem = new OverlayItem(p, "Pin", "Lembrete aqui!");
+			tapOverlay.addOverlay(overlayItem);
+			mapView.getOverlays().add(tapOverlay);
+			mapView.getController().setCenter(p);
+			
 			
 			if (cursor.getInt(cursor.getColumnIndexOrThrow(LocationTable.ACTIVE)) == 0) 
 				activeCheckBox.setChecked(false);
